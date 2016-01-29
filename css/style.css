@@ -1,3 +1,5 @@
+/* added a li styling to add in links for contact info*/
+
 body,
 div,
 ul,
@@ -11,7 +13,7 @@ h5,
 h6 {
   padding:0;
   margin:0;
-  font-family: "Roboto", sans-serif;
+  font-family: "Georgia", sans-serif;
 }
 
 .clear-fix {
@@ -26,7 +28,7 @@ h6 {
 
 h1 {
   font-size: 40px;
-  color: #f5a623;
+  color: #051126;
   line-height: 48px;
   display: inline;
 }
@@ -101,30 +103,30 @@ a {
 .welcome-message {
   font-style: italic;
   font-size: 18px;
-  color: #f3f3f3;
+  color: #1B5B5B;
   line-height: 28px;
 }
 
 #skills-h3 {
-  color: #f5ae23;
+  color: #051126;
   display: none;
 }
 
 .orange {
-  background-color: #f5ae23;
+  background-color: #051126;
 }
 
 .orange-text {
-  color: #f5ae23;
+  color: #051126;
 }
 
 .white-text {
   font-weight: bold;
-  color: #fff;
+  color: #C1C4D7;
 }
 
 .gray {
-  background-color: #f3f3f3;
+  background-color: #1B5B5B;
   padding-bottom: 10px;
   clear:both;
 }
