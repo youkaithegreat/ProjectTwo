@@ -6,12 +6,13 @@
  */
 //created bio JSON object with information that will propagate the header
 var bio = {
-    "full": "Kevin Yang",
+    "name": "Kevin Yang",
     "role": "Front End Developer",
     "contacts": {
         "mobile": "281-313-5248",
         "email": "yangkevint@gmail.com",
         "github": "YouKaiTheGreat",
+        "twitter": "youkaithegreat",
         "location": "Houston, Texas + Seoul, South Korea",
         "blog": "http://www.kevintyang.com"
     },
@@ -22,34 +23,28 @@ var bio = {
         //function propagates the head with the information from bio JSON object
 
         var formattedrole = HTMLheaderRole.replace("%data%", bio.role);
-        $("#header").prepend(formattedrole);
 
-        var formattedFirst = HTMLheaderName.replace("%data%", bio.full);
-        $("#header").prepend(formattedFirst);
+        var formattedFirst = HTMLheaderName.replace("%data%", bio.name);
+        $("#header").prepend(formattedFirst, formattedrole);
         //these two are in reverse prepend, so that they are above the contact items.
 
         var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
-        $("#topContacts:last").append(formattedMobile);
-        $("#footerContacts:last").append(formattedMobile);
 
         var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
-        $("#topContacts:last").append(formattedEmail);
-        $("#footerContacts:last").append(formattedEmail);
 
         //github and blog have replace twice to implement hyperlinking from helper.js
         var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
         formattedGithub = formattedGithub.replace("%data%", bio.contacts.github);
-        $("#topContacts:last").append(formattedGithub);
-        $("#footerContacts:last").append(formattedGithub);
+
+        var formattedTwitter = HTMLtwitter.replace("%data%", bio.contacts.twitter);
 
         var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
-        $("#topContacts:last").append(formattedLocation);
-        $("#footerContacts:last").append(formattedLocation);
 
         var formattedBlog = HTMLblog.replace("%data%", bio.contacts.blog);
         formattedBlog = formattedBlog.replace("%data%", bio.contacts.blog);
-        $("#topContacts:last").append(formattedBlog);
-        $("#footerContacts:last").append(formattedBlog);
+
+        $("#topContacts").append(formattedMobile + formattedEmail + formattedGithub + formattedTwitter + formattedLocation + formattedBlog);
+        $("#footerContacts").append(formattedMobile + formattedEmail + formattedGithub + formattedTwitter + formattedLocation + formattedBlog);
 
         var formattedWelcome = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
         $("#header").append(formattedWelcome);
@@ -57,15 +52,14 @@ var bio = {
         $("#header").append(formattedBiopic);
 
         //check to see that skills exist
-        if (bio.skills.length > 0) {
+        if (bio.skills.length) {
             $("#header").append(HTMLskillsStart);
         }
 
-        for (var info in bio.skills) {
-            if (bio.skills.hasOwnProperty(info)) {
-                var formattedSkills = HTMLskills.replace("%data%", bio.skills[info]);
-                $("#skills-h3").append(formattedSkills);
-            }
+        for (var i = 0; i < bio.skills.length; i++) {
+            var formattedSkills = HTMLskills.replace("%data%", bio.skills[i]);
+            $("#skills-h3").append(formattedSkills);
+
         }
 
 
@@ -80,7 +74,7 @@ var education = {
         "name": "The University of Texas at Austin",
         "location": "Austin",
         "degree": "Bachelor of Arts",
-        "majors": "East Asian Studies",
+        "majors": ["East Asian Studies"],
         "dates": "2012",
         "url": "http://www.utexas.edu"
 
@@ -88,7 +82,7 @@ var education = {
         "name": "National Cheng Chi University",
         "location": "Taipei, Taiwan",
         "degree": "Study Abroad",
-        "majors": "N/A",
+        "majors": ["N/A"],
         "dates": "2010",
         "url": "http://www.nccu.edu"
 
@@ -96,7 +90,7 @@ var education = {
         "name": "Sophia University",
         "location": "Tokyo, Japan",
         "degree": "Study Abroad",
-        "majors": "East Asian Studies",
+        "majors": ["N/A"],
         "dates": "2011",
         "url": "http://www.sophia.ac.jp/eng"
 
@@ -124,9 +118,10 @@ var education = {
                 var formattedSchoolDates = HTMLschoolDates.replace("%data%", education.schools[school].dates);
                 $(".education-entry:last").append(formattedSchoolDates);
 
-                var formattedSchoolMajors = HTMLschoolMajor.replace("%data%", education.schools[school].majors);
-                $(".education-entry:last").append(formattedSchoolMajors);
-
+                for (var i = 0; i < education.schools[school].majors.length; i++) {
+                    var formattedSchoolMajors = HTMLschoolMajor.replace("%data%", education.schools[school].majors[i]);
+                    $(".education-entry:last").append(formattedSchoolMajors);
+                }
 
             }
         }
@@ -178,24 +173,23 @@ var work = {
     "display": function() {
         $("#workExperience").append(HTMLworkStart);
 
-        for (var job in work.jobs) {
-            if (work.jobs.hasOwnProperty(job)) {
-                var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
-                var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
-                var formattedEmployerTitle = formattedEmployer + formattedTitle;
+        work.jobs.forEach(function(job) {
+            var formattedEmployer = HTMLworkEmployer.replace("%data%", job.employer);
+            var formattedTitle = HTMLworkTitle.replace("%data%", job.title);
+            var formattedEmployerTitle = formattedEmployer + formattedTitle;
 
-                $(".work-entry:last").append(formattedEmployerTitle);
+            $(".work-entry:last").append(formattedEmployerTitle);
 
-                var formattedWorkLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
-                $(".work-entry:last").append(formattedWorkLocation);
+            var formattedWorkLocation = HTMLworkLocation.replace("%data%", job.location);
+            $(".work-entry:last").append(formattedWorkLocation);
 
-                var formattedWorkDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
-                $(".work-entry:last").append(formattedWorkDates);
+            var formattedWorkDates = HTMLworkDates.replace("%data%", job.dates);
+            $(".work-entry:last").append(formattedWorkDates);
 
-                var formattedWorkDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
-                $(".work-entry:last").append(formattedWorkDescription);
-            }
-        }
+            var formattedWorkDescription = HTMLworkDescription.replace("%data%", job.description);
+            $(".work-entry:last").append(formattedWorkDescription);
+
+        });
     }
 
 };
