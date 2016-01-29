@@ -1,10 +1,11 @@
 /*
- This is empty on purpose! Your code to build the resume will go here.
+ Each JSON object has a function inside. All functions are called at the very bottom of this page
  */
 
+
+
 var bio = {
-    "first": "Kevin",
-    "last": "Yang",
+    "full": "Kevin Yang",
     "role": "Front End Developer",
     "contacts": {
         "mobile": "281-313-5248",
@@ -22,7 +23,7 @@ var bio = {
         var formattedrole = HTMLheaderRole.replace("%data%", bio.role);
         $("#header").prepend(formattedrole);
 
-        var formattedFirst = HTMLheaderName.replace("%data%", bio.first);
+        var formattedFirst = HTMLheaderName.replace("%data%", bio.full);
         $("#header").prepend(formattedFirst);
 
 
@@ -79,7 +80,7 @@ var education =
         "dates": "2012",
         "url": "http://www.utexas.edu"
 
-    },
+        },
         {
             "name": "National Cheng Chi University",
             "location": "Taipei, Taiwan",
@@ -106,22 +107,20 @@ var education =
     }],
     "display": function () {
 
-
         for (school in education.schools) {
+
             $("#education").append(HTMLschoolStart);
+
             var formattedSchoolName = HTMLschoolName.replace("%data%", education.schools[school].name);
             formattedSchoolName = formattedSchoolName.replace("#", education.schools[school].url);
             var formattedSchoolDegree = HTMLschoolDegree.replace("%data%", education.schools[school].degree);
             $(".education-entry:last").append(formattedSchoolName + formattedSchoolDegree);
 
-
             var formattedSchoolLocation = HTMLschoolLocation.replace("%data%", education.schools[school].location);
             $(".education-entry:last").append(formattedSchoolLocation);
 
-
             var formattedSchoolDates = HTMLschoolDates.replace("%data%", education.schools[school].dates);
             $(".education-entry:last").append(formattedSchoolDates);
-
 
             var formattedSchoolMajors = HTMLschoolMajor.replace("%data%", education.schools[school].majors);
             $(".education-entry:last").append(formattedSchoolMajors);
@@ -133,13 +132,17 @@ var education =
 
         for (courses in education.onlineCourses) {
             $("#education").append(HTMLschoolStart);
+
             var formattedTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[courses].title) + HTMLonlineSchool.replace("%data%", education.onlineCourses[courses].school);
-            formattedTitle = formattedTitle.replace("#",education.onlineCourses[courses].url);
+            formattedTitle = formattedTitle.replace("#", education.onlineCourses[courses].url);
             $(".education-entry:last").append(formattedTitle);
+
             var formattedDate = HTMLonlineDates.replace("%data%", education.onlineCourses[courses].date);
             $(".education-entry:last").append(formattedDate);
+
             var formattedUrl = HTMLonlineURL.replace("%data%", education.onlineCourses[courses].url);
             $(".education-entry:last").append(formattedUrl);
+
         }
     }
 };
@@ -197,7 +200,7 @@ var projects =
 {
     "projects": [{
         "title": "Online Portfolio",
-        "url":"http://www.kevintyang.com/projectone",
+        "url": "http://www.kevintyang.com/projectone",
         "dates": "2015",
         "description": "Personal Portfolio Website with a responsive layout. Built with Javascript, HTML, CSS, jQuery and Bootstrap",
         "images": ["images/projectone.png"]
@@ -208,7 +211,7 @@ var projects =
         for (project in projects.projects) {
 
             var formattedTitle = HTMLprojectTitle.replace("%data%", projects.projects[project].title);
-            formattedTitle = formattedTitle.replace("#",projects.projects[project].url);
+            formattedTitle = formattedTitle.replace("#", projects.projects[project].url);
             $(".project-entry:last").append(formattedTitle);
 
             var formattedDate = HTMLprojectDates.replace("%data%", projects.projects[project].dates);
@@ -227,9 +230,17 @@ var projects =
     }
 };
 
+var map = function () {
+    $("#mapDiv").append(googleMap);
+};
 
 bio.display();
 work.display();
 projects.display();
 education.display();
+map();
+
+
+$("#main").append(internationalizeButton);
+
 
