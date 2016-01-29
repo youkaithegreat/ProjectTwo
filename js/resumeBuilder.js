@@ -28,21 +28,26 @@ var bio = {
 
         var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
         $("#topContacts:last").append(formattedMobile);
+        $("#footerContacts:last").append(formattedMobile);
 
         var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
         $("#topContacts:last").append(formattedEmail);
+        $("#footerContacts:last").append(formattedEmail);
 
         //github and blog have replace twice to implement hyperlinking from helper.js
         var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
         formattedGithub = formattedGithub.replace("%data%", bio.contacts.github);
         $("#topContacts:last").append(formattedGithub);
+        $("#footerContacts:last").append(formattedGithub);
 
         var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
         $("#topContacts:last").append(formattedLocation);
+        $("#footerContacts:last").append(formattedLocation);
 
         var formattedBlog = HTMLblog.replace("%data%", bio.contacts.blog);
         formattedBlog = formattedBlog.replace("%data%", bio.contacts.blog);
         $("#topContacts:last").append(formattedBlog);
+        $("#footerContacts:last").append(formattedBlog);
 
         var formattedWelcome = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
         $("#header").append(formattedWelcome);
