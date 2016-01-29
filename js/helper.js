@@ -6,8 +6,6 @@
 
  Cameron Pittman
  */
-
-
 /*
  These are HTML strings. As part of the course, you'll be using JavaScript functions
  replace the %data% placeholder text you see in them.
@@ -64,10 +62,9 @@ var googleMap = '<div id="map"></div>';
 /*
  The International Name challenge in Lesson 2 where you'll create a function that will need this helper code to run. Don't delete! It hooks up your code to the button you'll be appending.
  */
-$(document).ready(function () {
-    $('button').click(function () {
-        var iName = inName(bio.full) || function () {
-            };
+$(document).ready(function() {
+    $('button').click(function() {
+        var iName = inName(bio.full) || function() {};
         $('#name').html(iName);
     });
 });
@@ -88,16 +85,14 @@ function inName(name) {
 clickLocations = [];
 
 function logClicks(x, y) {
-    clickLocations.push(
-        {
-            x: x,
-            y: y
-        }
-    );
+    clickLocations.push({
+        x: x,
+        y: y
+    });
     console.log('x location: ' + x + '; y location: ' + y);
 }
 
-$(document).click(function (loc) {
+$(document).click(function(loc) {
     var x = loc.pageX;
     var y = loc.pageY;
     console.log(logClicks(x, y));
@@ -108,7 +103,7 @@ $(document).click(function (loc) {
  See the documentation below for more details.
  https://developers.google.com/maps/documentation/javascript/reference
  */
-var map;    // declares a global map variable
+var map; // declares a global map variable
 
 
 /*
@@ -145,7 +140,7 @@ function initializeMap() {
         // the locations array. Note that forEach is used for array iteration
         // as described in the Udacity FEND Style Guide:
         // https://udacity.github.io/frontend-nanodegree-styleguide/javascript.html#for-in-loop
-        education.schools.forEach(function (school) {
+        education.schools.forEach(function(school) {
             locations.push(school.location);
         });
 
@@ -153,7 +148,7 @@ function initializeMap() {
         // the locations array. Note that forEach is used for array iteration
         // as described in the Udacity FEND Style Guide:
         // https://udacity.github.io/frontend-nanodegree-styleguide/javascript.html#for-in-loop
-        work.jobs.forEach(function (job) {
+        work.jobs.forEach(function(job) {
             locations.push(job.location);
         });
 
@@ -168,10 +163,10 @@ function initializeMap() {
     function createMapMarker(placeData) {
 
         // The next lines save location data from the search result object to local variables
-        var lat = placeData.geometry.location.lat();  // latitude from the place service
-        var lon = placeData.geometry.location.lng();  // longitude from the place service
-        var name = placeData.formatted_address;   // name of the place from the place service
-        var bounds = window.mapBounds;            // current boundaries of the map window
+        var lat = placeData.geometry.location.lat(); // latitude from the place service
+        var lon = placeData.geometry.location.lng(); // longitude from the place service
+        var name = placeData.formatted_address; // name of the place from the place service
+        var bounds = window.mapBounds; // current boundaries of the map window
 
         // marker is an object with additional data about the pin for a single location
         var marker = new google.maps.Marker({
@@ -188,7 +183,7 @@ function initializeMap() {
         });
 
         // hmmmm, I wonder what this is about...
-        google.maps.event.addListener(marker, 'click', function () {
+        google.maps.event.addListener(marker, 'click', function() {
             // your code goes here!
         });
 
@@ -222,7 +217,7 @@ function initializeMap() {
         var service = new google.maps.places.PlacesService(map);
 
         // Iterates through the array of locations, creates a search object for each location
-        locations.forEach(function (place) {
+        locations.forEach(function(place) {
             // the search request object
             var request = {
                 query: place
@@ -255,7 +250,7 @@ window.addEventListener('load', initializeMap);
 
 // Vanilla JS way to listen for resizing of the window
 // and adjust map bounds
-window.addEventListener('resize', function (e) {
+window.addEventListener('resize', function(e) {
     //Make sure the map bounds get updated on page resize
     map.fitBounds(mapBounds);
 });
